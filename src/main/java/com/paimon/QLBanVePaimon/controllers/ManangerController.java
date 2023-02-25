@@ -17,7 +17,7 @@ import com.paimon.QLBanVePaimon.sideModels.ResponseHandler;
 
 
 @RestController
-@RequestMapping("manager")
+@RequestMapping("managers")
 public class ManangerController {
     
     @Autowired
