@@ -2,7 +2,9 @@
 
 [Link frontend](https://github.com/RioRichard/NhaXePaimonFE)
 
+# Tạo database: 
 
+[Hãy đọc!](/mongoDB)
 
 # Kết nối database:
 
@@ -37,6 +39,11 @@ Trong đó cần chỉnh sửa 2 trường "MongoDB uri" và "Database name" sao
 
 Tạo 1 file mới tên .env file và điền các thông tin sau:
 
+````
 DB_NAME = "Tên db"
 MONGODB_URI = "URI của mongodb"
+````
+
+
+
 
