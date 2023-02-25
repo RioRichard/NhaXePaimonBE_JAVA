@@ -2,7 +2,7 @@
   "_id": {
     "$oid": "63f4d4ce03eeea8d7bcf181e"
   },
-  "user_name": "admin",
+  "username": "admin",
   "password": "pass",
   "email": "thanh.huuphungak47@gmail.com",
   "phone": "0384041641",
