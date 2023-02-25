@@ -11,7 +11,7 @@ import com.paimon.QLBanVePaimon.models.Manager;
 
 
 @Repository
-public interface ManagerRepository extends MongoRepository<Manager,ObjectId>{
+public interface ManagerRepository extends MongoRepository<Manager,String>{
 
     Page<Manager> findAll(Pageable pageable);
         

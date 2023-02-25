@@ -1,5 +1,6 @@
 package com.paimon.QLBanVePaimon.services;
 
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -15,12 +16,15 @@ public class ManagerService {
     @Autowired
     private ManagerRepository managerRepository;
 
-    
-    
     public ListData<Manager> getAll(Pageable pageable) {
-        
+
         var data = managerRepository.findAll(pageable);
         return new ListData<>(data);
-        
+
     }
+
+    public Optional<Manager> getId(String id) {
+        return managerRepository.findById(id);
+    }
+
 }

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,6 +39,18 @@ public class ManangerController {
         
         
         
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getId(@PathVariable String id) {
+        try {
+            var data = managerService.getId(id);
+            return ResponseHandler.generateMessage(null, HttpStatus.OK, "managers", data);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "managers", null);
+
+        }
     }
 
     // @GetMapping("/test")
