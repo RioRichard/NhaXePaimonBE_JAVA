@@ -31,8 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-### .env file
-.env
-.production.env
-.local.env
