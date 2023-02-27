@@ -1,9 +1,13 @@
 package com.paimon.QLBanVePaimon;
 
+import java.nio.charset.StandardCharsets;
+
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.google.common.hash.Hashing;
+
 public class Helper {
-    
+
     public static int minMaxOrNum(Integer num, int min, int max) {
         if (num == null) {
             return min;
@@ -28,6 +32,7 @@ public class Helper {
         return num.intValue();
 
     }
+
     public static int maxOrNum(Integer num, int max) {
         if (num == null) {
             return max;
@@ -42,5 +47,11 @@ public class Helper {
     public static String getUriPagination(UriComponentsBuilder uBuilder, int page) {
         return uBuilder.replaceQueryParam("page", page).build().encode().toUriString();
     }
-    
+
+    public static String hash256(String plainString) {
+        return Hashing.sha256()
+                .hashString(plainString, StandardCharsets.UTF_8)
+                .toString();
+    }
+
 }
