@@ -1,0 +1,13 @@
+[{
+  "_id": {
+    "$oid": "63f4d77003eeea8d7bcf1821"
+  },
+  "name": "Miền tây",
+  "address": "1234 Miền tây"
+},{
+  "_id": {
+    "$oid": "63f4d7a403eeea8d7bcf1822"
+  },
+  "name": "Miền tây",
+  "address": "1234 Miền tây"
+}]

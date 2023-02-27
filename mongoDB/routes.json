@@ -1,0 +1,52 @@
+[{
+  "_id": {
+    "$oid": "63f8d1b8dd69fc0200209ff8"
+  },
+  "from_Id": {
+    "$oid": "63f8e2c9dd69fc020020a001"
+  },
+  "to_Id": {
+    "$oid": "63f8e2ccdd69fc020020a002"
+  },
+  "departure": {
+    "$timestamp": {
+      "t": 1677255377,
+      "i": 172
+    }
+  },
+  "arrival": {
+    "$timestamp": {
+      "t": 1677255377,
+      "i": 173
+    }
+  },
+  "bus_id": {
+    "$oid": "63f8e103dd69fc0200209ffb"
+  },
+  "staff_id": {
+    "$oid": "63f8e1eadd69fc0200209fff"
+  },
+  "extra_Staff_id": {
+    "$oid": "63f8e1eddd69fc020020a000"
+  },
+  "tickets": [
+    {
+      "order": {
+        "order_id": {
+          "$oid": "63f8e758dd69fc020020a00c"
+        },
+        "status": "waiting"
+      },
+      "seat_id": {
+        "$oid": "63f8e75add69fc020020a00d"
+      }
+    },
+    {
+      "order": null,
+      "seat_id": {
+        "$oid": "63f8e75add69fc020020a00d"
+      }
+    }
+  ],
+  "price": 1000
+}]
