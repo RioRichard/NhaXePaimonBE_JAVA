@@ -2,6 +2,7 @@ package com.paimon.QLBanVePaimon.services;
 
 import java.util.Optional;
 
+import org.apache.catalina.User;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -36,6 +37,17 @@ public class ManagerService {
         manager.setPass(hasedPass);
         System.out.println(hasedPass);
         return managerRepository.insert(manager);
+    }
+
+    public Manager edit(String id ,Manager manager){
+
+        Manager updateManager = managerRepository.findById(id).get();
+        updateManager.setUsername(manager.getUsername());
+        updateManager.setPass(manager.getPass());
+        updateManager.setEmail(manager.getEmail());
+        updateManager.setPhone(manager.getPhone());
+        updateManager.setRole(manager.getRole());
+        return managerRepository.save(updateManager);
     }
 
 }

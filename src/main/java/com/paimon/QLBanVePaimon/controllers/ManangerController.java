@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,6 +62,12 @@ public class ManangerController {
         var res = managerService.add(manager);
         return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "managers", res);
         
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Manager manager){
+        var update = managerService.edit(id, manager);
+        return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "managers", update);
     }
 
     // @GetMapping("/test")
