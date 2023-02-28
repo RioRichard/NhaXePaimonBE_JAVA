@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import com.paimon.QLBanVePaimon.Helper;
 import com.paimon.QLBanVePaimon.models.Manager;
 import com.paimon.QLBanVePaimon.repositories.ManagerRepository;
+import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
+
+import lombok.var;
 
 @Service
 public class ManagerService {
@@ -36,6 +39,17 @@ public class ManagerService {
         manager.setPass(hasedPass);
         System.out.println(hasedPass);
         return managerRepository.insert(manager);
+    }
+
+    public Manager patch(String id, PatchRequest<Manager> patchManager) {
+        var dataChanging = managerRepository.findById(id).get();
+        
+       for (String propString : patchManager.getPropChanging()) {
+            var valueFromPatchData = Helper.get(patchManager.getData(), propString);
+            Helper.set(dataChanging, propString, valueFromPatchData);
+       }
+       managerRepository.save(dataChanging);
+       return dataChanging;
     }
 
 }
