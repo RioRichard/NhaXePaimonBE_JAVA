@@ -5,6 +5,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -84,6 +85,12 @@ public class ManangerController {
     public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Manager manager){
         var update = managerService.edit(id, manager);
         return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "managers", update);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> put(@PathVariable String id){
+        var delete = managerService.delete(id);
+        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "managers", delete);
     }
 
     // @GetMapping("/test")
