@@ -1,5 +1,6 @@
 package com.paimon.QLBanVePaimon;
 
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 
 import org.springframework.web.util.UriComponentsBuilder;
@@ -53,5 +54,40 @@ public class Helper {
                 .hashString(plainString, StandardCharsets.UTF_8)
                 .toString();
     }
+
+    public static boolean set(Object object, String fieldName, Object fieldValue) {
+        Class<?> clazz = object.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                field.set(object, fieldValue);
+                return true;
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return false;
+    }
+    public static Object get(Object object, String fieldName) {
+        Class<?> clazz = object.getClass();
+        while (clazz != null) {
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+                
+                return field.get(object);
+            } catch (NoSuchFieldException e) {
+                clazz = clazz.getSuperclass();
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
+        }
+        return null;
+       
+    }
+    
 
 }
