@@ -53,11 +53,11 @@ public class ManagerService {
 
     }
 
-    public Manager delete(String id){
+    public void delete(String id){
 
-        Manager deleteManager = managerRepository.findById(id).get();
+        
         managerRepository.deleteById(id);
-        return deleteManager;
+        return;
     }
 
     public Manager patch(String id, PatchRequest<Manager> patchManager) {
