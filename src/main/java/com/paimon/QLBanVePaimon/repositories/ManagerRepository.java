@@ -13,7 +13,7 @@ import com.paimon.QLBanVePaimon.models.Manager;
 public interface ManagerRepository extends MongoRepository<Manager,String>{
 
     Page<Manager> findAll(Pageable pageable);
-        
+    Manager getByUsername(String username);
 
     
 }
