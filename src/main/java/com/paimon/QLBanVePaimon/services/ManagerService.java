@@ -33,15 +33,14 @@ public class ManagerService {
         return managerRepository.findById(id);
     }
 
-    public Manager add(Manager manager){
+    public Manager add(Manager manager) {
         var id = new ObjectId();
         manager.setId(id.toString());
-        var hasedPass = Helper.hash256(manager.getId()+manager.getPass());
+        var hasedPass = Helper.hash256(manager.getId() + manager.getPass());
         manager.setPass(hasedPass);
         System.out.println(hasedPass);
         return managerRepository.insert(manager);
     }
-
 
     public Manager edit(String id ,Manager manager){
 
@@ -53,15 +52,24 @@ public class ManagerService {
         updateManager.setRole(manager.getRole());
         return managerRepository.save(updateManager);
 
+    }
+
+    public Manager delete(String id){
+
+        Manager deleteManager = managerRepository.findById(id).get();
+        managerRepository.deleteById(id);
+        return deleteManager;
+    }
+
     public Manager patch(String id, PatchRequest<Manager> patchManager) {
         var dataChanging = managerRepository.findById(id).get();
-        
-       for (String propString : patchManager.getPropChanging()) {
+
+        for (String propString : patchManager.getPropChanging()) {
             var valueFromPatchData = Helper.get(patchManager.getData(), propString);
             Helper.set(dataChanging, propString, valueFromPatchData);
-       }
-       managerRepository.save(dataChanging);
-       return dataChanging;
+        }
+        managerRepository.save(dataChanging);
+        return dataChanging;
 
     }
 
