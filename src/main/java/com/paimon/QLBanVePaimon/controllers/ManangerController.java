@@ -89,8 +89,14 @@ public class ManangerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> put(@PathVariable String id){
-        var delete = managerService.delete(id);
-        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "managers", delete);
+        try {
+            managerService.delete(id);
+            return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "managers", null);
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "managers", null);
+        }
+
+       
     }
 
     // @GetMapping("/test")
