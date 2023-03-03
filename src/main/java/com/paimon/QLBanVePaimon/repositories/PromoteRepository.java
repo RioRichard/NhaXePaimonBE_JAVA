@@ -5,15 +5,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.paimon.QLBanVePaimon.models.Manager;
-
-
+import com.paimon.QLBanVePaimon.models.Promote;
 
 @Repository
-public interface ManagerRepository extends MongoRepository<Manager,String>{
-
-    Page<Manager> findAll(Pageable pageable);
-    Manager getByUsername(String username);
-
+public interface PromoteRepository extends MongoRepository<Promote,String>{
     
+    Page<Promote> findAll(Pageable pageable);
+
 }

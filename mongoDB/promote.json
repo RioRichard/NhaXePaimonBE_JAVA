@@ -1,19 +1,18 @@
 [{
   "_id": {
-    "$oid": "63f8ee57dd69fc020020a02d"
+    "$oid": "63ff6d1278dd2369d7169cb0"
   },
   "from": {
-    "$timestamp": {
-      "t": 1677258464,
-      "i": 1
+    "$date": {
+      "$numberLong": "1677744195431"
     }
   },
   "to": {
-    "$timestamp": {
-      "t": 1677258464,
-      "i": 2
+    "$date": {
+      "$numberLong": "1678608195431"
     }
   },
-  "type": "",
-  "amount": 100
+  "type": "wut",
+  "amount": 100,
+  "_class": "com.paimon.QLBanVePaimon.models.Promote"
 }]

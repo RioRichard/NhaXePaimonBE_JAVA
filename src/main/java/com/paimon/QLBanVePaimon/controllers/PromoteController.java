@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.paimon.QLBanVePaimon.AppConstant;
-import com.paimon.QLBanVePaimon.models.Manager;
+import com.paimon.QLBanVePaimon.models.Promote;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
-import com.paimon.QLBanVePaimon.services.ManagerService;
+import com.paimon.QLBanVePaimon.services.PromoteService;
 import com.paimon.QLBanVePaimon.sideModels.ResponseHandler;
 
 @RestController
-@RequestMapping("managers")
-public class ManangerController {
+@RequestMapping("promotes")
+public class PromoteController {
 
     @Autowired
-    private ManagerService managerService;
+    private PromoteService promoteService;
 
     @GetMapping
     public ResponseEntity<Object> getAll(
@@ -36,19 +36,17 @@ public class ManangerController {
 
         try {
             Pageable pageable = PageRequest.of(page - 1, size);
-            var data = managerService.getAll(pageable);
+            var data = promoteService.getAll(pageable);
             return ResponseHandler.generateMessage(null, HttpStatus.OK, "managers", data);
         } catch (Exception e) {
             return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "managers", null);
 
         }
-
     }
-
     @GetMapping("/{id}")
     public ResponseEntity<Object> getId(@PathVariable String id) {
         try {
-            var data = managerService.getId(id);
+            var data = promoteService.getId(id);
             return ResponseHandler.generateMessage(null, HttpStatus.OK, "managers", data);
 
         } catch (Exception e) {
@@ -58,9 +56,9 @@ public class ManangerController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> post(@RequestBody Manager manager) {
+    public ResponseEntity<Object> post(@RequestBody Promote promote) {
         try {
-            var res = managerService.add(manager);
+            var res = promoteService.add(promote);
             return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "managers", res);
 
         } catch (Exception e) {
@@ -71,9 +69,9 @@ public class ManangerController {
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<Object> patch(@PathVariable String id, @RequestBody PatchRequest<Manager> patchManager) {
+    public ResponseEntity<Object> patch(@PathVariable String id, @RequestBody PatchRequest<Promote> patchPromote) {
         try {
-            var res = managerService.patch(id, patchManager);
+            var res = promoteService.patch(id, patchPromote);
             return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", res);
         } catch (Exception e) {
             return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "managers", null);
@@ -82,27 +80,15 @@ public class ManangerController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Manager manager){
-        var update = managerService.edit(id, manager);
+    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Promote manager) {
+        var update = promoteService.edit(id, manager);
         return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "managers", update);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> put(@PathVariable String id){
-        try {
-            managerService.delete(id);
-            return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "managers", null);
-        } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "managers", null);
-        }
-
-       
+    public ResponseEntity<Object> put(@PathVariable String id) {
+        promoteService.delete(id);
+        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "managers", null);
     }
-
-    // @GetMapping("/test")
-    // public Object testMethod() {
-
-    // return Helper.hash256("63fcd8afea76fd03d8bc25d7" + "12345");
-    // }
 
 }

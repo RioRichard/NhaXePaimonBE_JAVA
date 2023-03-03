@@ -2,7 +2,6 @@ package com.paimon.QLBanVePaimon.services;
 
 import java.util.Optional;
 
-import org.apache.catalina.User;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -54,11 +53,11 @@ public class ManagerService {
 
     }
 
-    public Manager delete(String id){
+    public void delete(String id){
 
-        Manager deleteManager = managerRepository.findById(id).get();
+        
         managerRepository.deleteById(id);
-        return deleteManager;
+        return;
     }
 
     public Manager patch(String id, PatchRequest<Manager> patchManager) {
