@@ -9,15 +9,13 @@
     "$oid": "63f8e2ccdd69fc020020a002"
   },
   "departure": {
-    "$timestamp": {
-      "t": 1677255377,
-      "i": 172
+    "$date": {
+      "$numberLong": "1669914000000"
     }
   },
   "arrival": {
-    "$timestamp": {
-      "t": 1677255377,
-      "i": 173
+    "$date": {
+      "$numberLong": "1669914000000"
     }
   },
   "bus_id": {
