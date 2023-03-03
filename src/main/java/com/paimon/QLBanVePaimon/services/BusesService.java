@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import com.paimon.QLBanVePaimon.Helper;
 import com.paimon.QLBanVePaimon.models.Buses;
+import com.paimon.QLBanVePaimon.models.Seat;
 import com.paimon.QLBanVePaimon.repositories.BusesRepository;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
@@ -34,6 +35,10 @@ public class BusesService {
     public Buses add(Buses buses) {
         var id = new ObjectId();
         buses.setId(id.toString());
+        for (Seat seat : buses.getSeats()) {
+            var seatId = new ObjectId();
+            seat.setId(seatId.toString());
+        }
         return busesRepository.insert(buses);
     }
 
