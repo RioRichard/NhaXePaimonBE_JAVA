@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import nonapi.io.github.classgraph.json.Id;
 
-@Document(collection = "seats")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
