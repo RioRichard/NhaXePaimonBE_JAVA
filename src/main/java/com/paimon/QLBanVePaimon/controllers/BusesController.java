@@ -17,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.paimon.QLBanVePaimon.AppConstant;
-import com.paimon.QLBanVePaimon.models.Bases;
+import com.paimon.QLBanVePaimon.models.Buses;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
-import com.paimon.QLBanVePaimon.services.BasesService;
+import com.paimon.QLBanVePaimon.services.BusesService;
 import com.paimon.QLBanVePaimon.sideModels.ResponseHandler;
 
 @RestController
-@RequestMapping("bases")
-public class BasesController {
+@RequestMapping("buses")
+public class BusesController {
     
     @Autowired
-    private BasesService basesService;
+    private BusesService busesService;
 
     @GetMapping
     public ResponseEntity<Object> getAll(
@@ -36,10 +36,10 @@ public class BasesController {
 
         try {
             Pageable pageable = PageRequest.of(page - 1, size);
-            var data = basesService.getAll(pageable);
-            return ResponseHandler.generateMessage(null, HttpStatus.OK, "bases", data);
+            var data = busesService.getAll(pageable);
+            return ResponseHandler.generateMessage(null, HttpStatus.OK, "buses", data);
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "bases", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
 
         }
     }
@@ -47,51 +47,49 @@ public class BasesController {
     @GetMapping("/{id}")
     public ResponseEntity<Object> getId(@PathVariable String id) {
         try {
-            var data = basesService.getId(id);
-            return ResponseHandler.generateMessage(null, HttpStatus.OK, "bases", data);
+            var data = busesService.getId(id);
+            return ResponseHandler.generateMessage(null, HttpStatus.OK, "buses", data);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "bases", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
 
         }
     }
 
     @PostMapping
-    public ResponseEntity<Object> post(@RequestBody Bases bases) {
+    public ResponseEntity<Object> post(@RequestBody Buses buses) {
         try {
-            var res = basesService.add(bases);
-            return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "bases", res);
+            var res = busesService.add(buses);
+            return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "buses", res);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "bases", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
 
         }
 
     }
 
     @PatchMapping("{id}")
-    public ResponseEntity<Object> patch(@PathVariable String id, @RequestBody PatchRequest<Bases> patchBases) {
+    public ResponseEntity<Object> patch(@PathVariable String id, @RequestBody PatchRequest<Buses> patchBuses) {
         try {
-            var res = basesService.patch(id, patchBases);
-            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "bases", res);
+            var res = busesService.patch(id, patchBuses);
+            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "buses", res);
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "bases", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
         }
 
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Bases bases){
-        var update = basesService.edit(id, bases);
-        return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "bases", update);
+    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Buses buses){
+        var update = busesService.edit(id, buses);
+        return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "buses", update);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> put(@PathVariable String id){
-        var delete = basesService.delete(id);
-        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "bases", delete);
+        var delete = busesService.delete(id);
+        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "buses", delete);
     }
-
-
-
+    
 }
