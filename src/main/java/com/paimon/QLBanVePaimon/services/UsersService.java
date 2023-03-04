@@ -50,7 +50,7 @@ public class UsersService {
     public Users edit(String id ,Users users){
 
         Users updateUsers = usersRepository.findById(id).get();
-        updateUsers.setUser_name(users.getUser_name());
+        updateUsers.setUsername(users.getUsername());
         updateUsers.setPassword(users.getPassword());
         updateUsers.setName(users.getName());
         updateUsers.setEmail(users.getEmail());
