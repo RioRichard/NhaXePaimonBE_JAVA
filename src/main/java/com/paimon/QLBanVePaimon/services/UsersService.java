@@ -59,7 +59,7 @@ public class UsersService {
 
         Users updateUsers = usersRepository.findById(id).get();
         updateUsers.setUsername(users.getUsername());
-        updateUsers.setPassword(users.getPassword());
+        updateUsers.setPassword(Helper.hash256(id + users.getPassword()));
         updateUsers.setName(users.getName());
         updateUsers.setEmail(users.getEmail());
         updateUsers.setPhone(users.getPhone());

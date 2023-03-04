@@ -45,7 +45,8 @@ public class ManagerService {
 
         Manager updateManager = managerRepository.findById(id).get();
         updateManager.setUsername(manager.getUsername());
-        updateManager.setPass(manager.getPass());
+
+        updateManager.setPass(Helper.hash256(id + manager.getPass()));
         updateManager.setEmail(manager.getEmail());
         updateManager.setPhone(manager.getPhone());
         updateManager.setRole(manager.getRole());
