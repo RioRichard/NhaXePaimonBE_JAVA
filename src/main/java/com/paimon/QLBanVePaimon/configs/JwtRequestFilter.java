@@ -10,14 +10,14 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.paimon.QLBanVePaimon.services.AuthenticationService;
+import com.paimon.QLBanVePaimon.services.ManagerDetailService;
 
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
 public class JwtRequestFilter extends OncePerRequestFilter{
     @Autowired
-    private AuthenticationService authenticationService;
+    private ManagerDetailService managerDetailService;
 
     @Autowired
     private JwtTokenUtil jwtTokenUtil;
@@ -26,7 +26,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
     protected void doFilterInternal(jakarta.servlet.http.HttpServletRequest request,
             jakarta.servlet.http.HttpServletResponse response, jakarta.servlet.FilterChain chain)
             throws jakarta.servlet.ServletException, IOException {
-        // TODO Auto-generated method stub
+ 
         final String requestTokenHeader = request.getHeader("Authorization");
 
         String username = null;
@@ -49,7 +49,7 @@ public class JwtRequestFilter extends OncePerRequestFilter{
         // Once we get the token validate it.
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-            UserDetails userDetails = this.authenticationService.loadUserByUsername(username);
+            UserDetails userDetails = this.managerDetailService.loadUserByUsername(username);
 
             // if token is valid configure Spring Security to manually set
             // authentication

@@ -3,13 +3,16 @@ package com.paimon.QLBanVePaimon.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.paimon.QLBanVePaimon.configs.JwtTokenUtil;
 import com.paimon.QLBanVePaimon.requestModel.LoginModel;
 import com.paimon.QLBanVePaimon.services.AuthenticationService;
+import com.paimon.QLBanVePaimon.services.ManagerDetailService;
 import com.paimon.QLBanVePaimon.sideModels.ResponseHandler;
 
 @RestController
@@ -18,18 +21,25 @@ public class AuthenticationController {
 
     @Autowired
     private AuthenticationService authenticationService;
+    @Autowired
+    ManagerDetailService managerDetailService;
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
     @PostMapping("/admin")
     public ResponseEntity<Object> authAdmin(@RequestBody LoginModel loginModel) {
-        
+
         try {
             var data = authenticationService.getAdminToken(loginModel);
-            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", data);
+            final String username = data.getUsername();
+            final UserDetails userDetails = managerDetailService.loadUserByUsername(username);
+            final String token = jwtTokenUtil.generateToken(userDetails);
+            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", token);
 
         } catch (Exception e) {
             return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "managers", null);
-            
+
         }
-        
 
     }
 }
