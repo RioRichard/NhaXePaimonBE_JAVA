@@ -1,7 +1,6 @@
 package com.paimon.QLBanVePaimon.models;
 
-import java.util.List;
-
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -9,21 +8,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import nonapi.io.github.classgraph.json.Id;
 
-@Document(collection = "buses")
+@Document(collection = "staffs")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Buses {
+public class Staffs {
     @Id
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
-    private String bus_number;
+    private String name;
 
-    private String type;
-    
-    
-    private List<Seat> seats;
+    private String address;
+
+    private String phone;
+
+    private String position;
 }
