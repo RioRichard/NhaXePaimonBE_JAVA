@@ -41,7 +41,7 @@ public class ManagerService {
         return managerRepository.insert(manager);
     }
 
-    public Manager edit(String id ,Manager manager){
+    public Manager edit(String id, Manager manager) {
 
         Manager updateManager = managerRepository.findById(id).get();
         updateManager.setUsername(manager.getUsername());
@@ -53,9 +53,8 @@ public class ManagerService {
 
     }
 
-    public void delete(String id){
+    public void delete(String id) {
 
-        
         managerRepository.deleteById(id);
         return;
     }
@@ -65,6 +64,10 @@ public class ManagerService {
 
         for (String propString : patchManager.getPropChanging()) {
             var valueFromPatchData = Helper.get(patchManager.getData(), propString);
+            if (propString == "password") {
+                var managerId = Helper.get(patchManager.getData(), "id");
+                valueFromPatchData = Helper.hash256(managerId + valueFromPatchData.toString());
+            }
             Helper.set(dataChanging, propString, valueFromPatchData);
         }
         managerRepository.save(dataChanging);
