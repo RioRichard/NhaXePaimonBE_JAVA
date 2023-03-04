@@ -18,7 +18,7 @@ public class Users {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
-    private String user_name;
+    private String username;
 
     private String password;
 
