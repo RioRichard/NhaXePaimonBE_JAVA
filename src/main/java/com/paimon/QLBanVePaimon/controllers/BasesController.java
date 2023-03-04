@@ -83,13 +83,13 @@ public class BasesController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Bases bases){
         var update = basesService.edit(id, bases);
-        return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "managers", update);
+        return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "bases", update);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> put(@PathVariable String id){
         var delete = basesService.delete(id);
-        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "managers", delete);
+        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "bases", delete);
     }
 
 
