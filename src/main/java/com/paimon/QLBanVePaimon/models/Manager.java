@@ -1,9 +1,17 @@
 package com.paimon.QLBanVePaimon.models;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import org.springframework.context.annotation.Role;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +35,8 @@ public class Manager {
 
     private String phone;
 
+
+
     private String role;
 
-    
 }
