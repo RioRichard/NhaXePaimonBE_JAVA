@@ -28,15 +28,18 @@ public class WebSecurityConfigs {
         httpSecurity.csrf().disable()
 
                 .authorizeHttpRequests().requestMatchers("/authen/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().authorizeHttpRequests()
+                // .anyRequest()
+                // .authenticated()
+                .requestMatchers("/managers/**").hasRole("ADMIN")
                 
                 
                     
-                        .requestMatchers(HttpMethod.DELETE,"/rest/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.GET,"/rest/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.POST,"/rest/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT,"/rest/**").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.TRACE,"/rest/**").hasRole("ADMIN").and()
+                        // .requestMatchers(HttpMethod.DELETE,"/rest/**").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.GET,"/rest/**").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.POST,"/rest/**").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.PUT,"/rest/**").hasRole("ADMIN")
+                        // .requestMatchers(HttpMethod.TRACE,"/rest/**").hasRole("ADMIN")
+                        .and()
 
 
                         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
