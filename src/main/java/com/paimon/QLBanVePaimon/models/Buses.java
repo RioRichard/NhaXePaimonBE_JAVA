@@ -3,6 +3,7 @@ package com.paimon.QLBanVePaimon.models;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -24,6 +25,6 @@ public class Buses {
 
     private String type;
     
-    
+    @DocumentReference
     private List<Seat> seats;
 }

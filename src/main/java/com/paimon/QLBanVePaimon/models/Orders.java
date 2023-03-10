@@ -1,15 +1,10 @@
 package com.paimon.QLBanVePaimon.models;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -26,15 +21,15 @@ public class Orders {
     private String id;
 
     @Field("user_id")
-    @DocumentReference
-    private Users users;
-    @Transient
-    @Value("users.id")
-    String userid;
+    private String userid;
 
     @Field("promote_id")
     @DocumentReference
     private Promote promote;
+
+    @ReadOnlyProperty
+    @DocumentReference(lookup="{'orders':?#{#self._id} }")
+    private Routes route;
 
     private String status;
 

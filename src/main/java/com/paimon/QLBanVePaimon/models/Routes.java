@@ -1,6 +1,7 @@
 package com.paimon.QLBanVePaimon.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -22,9 +23,6 @@ public class Routes {
 
     @Id
     private String id;
-
-    // @DocumentReference
-    // private String from_id;
 
     @Field("from_Id")
     @DocumentReference
@@ -80,11 +78,9 @@ public class Routes {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String extraStaffId;
 
-    
+    @Field("orders")
+    private List<String> orders;
 
     private float price;
-
-
-
 
 }

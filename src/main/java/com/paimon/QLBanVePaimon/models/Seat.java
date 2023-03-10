@@ -1,5 +1,7 @@
 package com.paimon.QLBanVePaimon.models;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -7,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import nonapi.io.github.classgraph.json.Id;
 
+@Document
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
