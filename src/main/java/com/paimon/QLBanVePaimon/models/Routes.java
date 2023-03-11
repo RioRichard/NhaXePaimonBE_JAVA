@@ -37,7 +37,6 @@ public class Routes {
     @Field("to_Id")
     @DocumentReference
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-
     private Bases to;
 
     @Transient
@@ -61,7 +60,6 @@ public class Routes {
     @Field("staff_id")
     @DocumentReference
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-
     private Staffs staff;
 
     @Transient
@@ -71,7 +69,6 @@ public class Routes {
     @Field("extra_Staff_id")
     @DocumentReference
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-
     private Staffs extraStaff;
 
     @Transient

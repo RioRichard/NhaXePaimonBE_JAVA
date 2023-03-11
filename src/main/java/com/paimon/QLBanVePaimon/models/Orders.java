@@ -25,8 +25,10 @@ public class Orders {
 
     @Field("promote_id")
     @DocumentReference
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Promote promote;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     @ReadOnlyProperty
     @DocumentReference(lookup="{'orders':?#{#self._id} }")
     private Routes route;

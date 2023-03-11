@@ -55,7 +55,8 @@ public class OrdersController {
     @PostMapping
     public ResponseEntity<Object> post(@RequestBody Orders orders) {
         try {
-            var res = ordersService.add(orders);
+            // var res = ordersService.add(orders);
+            var res = orders;
             return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "bases", res);
 
         } catch (Exception e) {
