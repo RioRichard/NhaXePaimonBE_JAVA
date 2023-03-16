@@ -1,7 +1,5 @@
 package com.paimon.QLBanVePaimon.services;
 
-import java.util.Optional;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -19,14 +17,18 @@ public class UsersService {
     @Autowired
     private UsersRepository usersRepository;
 
+    
+
     public ListData<Users> getAll(Pageable pageable) {
 
         var data = usersRepository.findAll(pageable);
         return new ListData<>(data);
     }
 
-    public Optional<Users> getId(String id) {
-        return usersRepository.findById(id);
+    public Users getId(String id) {
+        var data = usersRepository.findById(id).get();
+        
+        return data;
     }
 
     public Users add(Users users) {
