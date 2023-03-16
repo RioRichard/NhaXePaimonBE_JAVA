@@ -11,5 +11,5 @@ import com.paimon.QLBanVePaimon.models.Users;
 public interface UsersRepository extends MongoRepository<Users,String>{
     
     Page<Users> findAll(Pageable pageable);
-
+    Users getByUsername(String username);
 }
