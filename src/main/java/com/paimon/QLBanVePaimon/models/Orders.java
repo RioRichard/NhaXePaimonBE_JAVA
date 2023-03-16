@@ -2,8 +2,8 @@ package com.paimon.QLBanVePaimon.models;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,15 +26,32 @@ public class Orders {
     private String id;
 
     @Field("user_id")
-    @DocumentReference
-    private Users users;
-    @Transient
-    @Value("users.id")
-    String userid;
+    @DBRef
+    // private Users users;
 
-    @Field("promote_id")
+    // @Transient
+    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    String userId;
+
+    // @Field("promote_id")
+    // @DocumentReference
+    // private Promote promote;
+
+    // @Transient
+    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    // String promoteId;
+
+    @Field("seats")
     @DocumentReference
-    private Promote promote;
+    private List<Seat> seat;
+
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    List<String> seatId;
+
+    @ReadOnlyProperty
+    @DocumentReference(lookup="{'routes':?#{#self.id} }"  )
+    private Routes route;
 
     private String status;
 

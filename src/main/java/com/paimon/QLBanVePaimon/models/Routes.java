@@ -1,9 +1,11 @@
 package com.paimon.QLBanVePaimon.models;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -14,7 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Document
+@Document("routes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,9 +24,6 @@ public class Routes {
 
     @Id
     private String id;
-
-    // @DocumentReference
-    // private String from_id;
 
     @Field("from_Id")
     @DocumentReference
@@ -80,11 +79,9 @@ public class Routes {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String extraStaffId;
 
-    
-
+    @DBRef
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private List<String> orders;
     private float price;
-
-
-
 
 }

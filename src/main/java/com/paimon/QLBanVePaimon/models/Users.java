@@ -1,7 +1,11 @@
 package com.paimon.QLBanVePaimon.models;
 
+import java.util.List;
+
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -20,6 +24,8 @@ public class Users {
 
     private String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+
     private String password;
 
     private String name;
@@ -27,4 +33,9 @@ public class Users {
     private String email;
 
     private String phone;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ReadOnlyProperty
+    @DocumentReference(lookup="{'userId':?#{#self.id} }"  )
+    private List<Orders> orders;
 }

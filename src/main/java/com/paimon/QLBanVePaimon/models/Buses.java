@@ -3,7 +3,7 @@ package com.paimon.QLBanVePaimon.models;
 import java.util.List;
 
 import org.springframework.data.mongodb.core.mapping.Document;
-
+import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -25,5 +25,8 @@ public class Buses {
     private String type;
     
     
+  
+    // @DocumentReference(lookup = "{'seat_id' = ?#{#self._id}}")
+    @DocumentReference
     private List<Seat> seats;
 }
