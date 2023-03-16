@@ -32,4 +32,18 @@ public class AuthenticationController {
         
 
     }
+    @PostMapping("")
+    public ResponseEntity<Object> authUser(@RequestBody LoginModel loginModel) {
+        
+        try {
+            var data = authenticationService.getAdminToken(loginModel);
+            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", data);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "managers", null);
+            
+        }
+        
+
+    }
 }
