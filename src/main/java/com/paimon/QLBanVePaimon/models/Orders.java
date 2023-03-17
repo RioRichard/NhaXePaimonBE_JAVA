@@ -54,6 +54,11 @@ public class Orders {
     // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     // private String userId;
 
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @ReadOnlyProperty
+    @DocumentReference(lookup="{'orders':?#{#self._id} }")
+    private Routes route;
+
     private String status;
     private String paymentInfo;
 }
