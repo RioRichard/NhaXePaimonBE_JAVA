@@ -31,12 +31,12 @@ public class Orders {
     @JsonIgnoreProperties(value = "seat", allowSetters = false)
     private List<Seat> seat;
 
-    @ReadOnlyProperty
-    @DocumentReference(lookup = "{'routes':?#{#self.id} }")
-    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @JsonIgnoreProperties(value = "route", allowSetters = false)
+    // @ReadOnlyProperty
+    // @DocumentReference(lookup = "{'routes':?#{#self.id} }")
+    // // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    // @JsonIgnoreProperties(value = "route", allowSetters = false)
 
-    private Routes route;
+    // private Routes route;
 
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
