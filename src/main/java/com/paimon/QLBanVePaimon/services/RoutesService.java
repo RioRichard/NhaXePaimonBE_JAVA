@@ -21,4 +21,8 @@ public class RoutesService {
         var data = routesRepository.findAll(pageable);
         return new ListData<Routes>(data);
     }
+
+    public Routes getById(String id) {
+        return routesRepository.findById(id).get();
+    }
 }

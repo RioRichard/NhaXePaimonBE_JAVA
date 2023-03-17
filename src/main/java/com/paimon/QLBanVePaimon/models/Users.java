@@ -6,6 +6,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -18,7 +20,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Users {
-    @Id
+    @MongoId(targetType = FieldType.OBJECT_ID)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
@@ -35,7 +37,6 @@ public class Users {
     private String phone;
 
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @ReadOnlyProperty
-    @DocumentReference(lookup="{'userId':?#{#self.id} }"  )
+    @DocumentReference(lazy = true,collection = "orders" )
     private List<Orders> orders;
 }

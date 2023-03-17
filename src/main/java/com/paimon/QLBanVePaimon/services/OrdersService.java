@@ -7,11 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.paimon.QLBanVePaimon.Helper;
 import com.paimon.QLBanVePaimon.models.Orders;
-import com.paimon.QLBanVePaimon.models.Users;
 import com.paimon.QLBanVePaimon.repositories.OrdersRepository;
-import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
+import com.paimon.QLBanVePaimon.repositories.RoutesRepository;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
 
 @Service
@@ -20,6 +18,9 @@ public class OrdersService {
     @Autowired
     private OrdersRepository ordersRepository;
 
+    @Autowired
+    private RoutesRepository routesRepository;
+
     public ListData<Orders> getAll(Pageable pageable) {
 
         var data = ordersRepository.findAll(pageable);
@@ -27,13 +28,35 @@ public class OrdersService {
     }
 
     public Optional<Orders> getId(String id) {
+        
         return ordersRepository.findById(id);
     }
+
+    
 
     public Orders add(Orders orders) {
         var id = new ObjectId();
         orders.setId(id.toString());
-        return ordersRepository.insert(orders);
+        // var route = routesRepository.findById(orders.getRouteId()).get();
+        // var listOrders = route.getOrders();
+        // listOrders.add(id.toString());
+        // route.setOrders(listOrders);
+        // routesRepository.save(route);
+        ordersRepository.insert(orders);
+
+        return orders;
+    }
+
+    public Orders edit(String id ,Orders orders){
+
+        orders.setId(id);
+        return ordersRepository.save(orders);
+
+    }
+    public Orders delete(String id){
+        Orders deleteOrders = ordersRepository.findById(id).get();
+        ordersRepository.deleteById(id);
+        return deleteOrders;
     }
 
     /* public Bases patch(String id, PatchRequest<Bases> patchBases) {
@@ -48,18 +71,7 @@ public class OrdersService {
 
     }
 
-    public Bases edit(String id ,Bases bases){
+    
 
-        Bases updateBases = basesRepository.findById(id).get();
-        updateBases.setName(bases.getName());
-        updateBases.setAddress(bases.getAddress());
-        return basesRepository.save(updateBases);
-
-    }
-
-    public Bases delete(String id){
-        Bases deleteBases = basesRepository.findById(id).get();
-        basesRepository.deleteById(id);
-        return deleteBases;
-    } */
+    */
 }

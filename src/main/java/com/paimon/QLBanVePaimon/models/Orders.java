@@ -2,14 +2,15 @@ package com.paimon.QLBanVePaimon.models;
 
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
+import org.springframework.data.mongodb.core.mapping.FieldType;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -21,39 +22,38 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Orders {
-    @Id
+    @MongoId(targetType = FieldType.OBJECT_ID)
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String id;
 
-    @Field("user_id")
-    @DBRef
-    // private Users users;
-
-    // @Transient
-    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    String userId;
-
-    // @Field("promote_id")
-    // @DocumentReference
-    // private Promote promote;
-
-    // @Transient
-    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    // String promoteId;
-
     @Field("seats")
     @DocumentReference
+    @JsonIgnoreProperties(value = "seat", allowSetters = false)
     private List<Seat> seat;
+
+    @ReadOnlyProperty
+    @DocumentReference(lookup = "{'routes':?#{#self.id} }")
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnoreProperties(value = "route", allowSetters = false)
+
+    private Routes route;
 
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    List<String> seatId;
+    private List<String> seatId;
 
-    @ReadOnlyProperty
-    @DocumentReference(lookup="{'routes':?#{#self.id} }"  )
-    private Routes route;
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String routeId;
+
+    @Field("user_id")
+    @DocumentReference(lookup = "{ 'userId' : ?#{#target} }")
+    private String userId;
+
+    // @Transient
+    // @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    // private String userId;
 
     private String status;
-
     private String paymentInfo;
 }

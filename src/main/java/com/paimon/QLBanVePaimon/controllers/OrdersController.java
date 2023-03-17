@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -47,10 +46,10 @@ public class OrdersController {
     public ResponseEntity<Object> getId(@PathVariable String id) {
         try {
             var data = ordersService.getId(id);
-            return ResponseHandler.generateMessage(null, HttpStatus.OK, "bases", data);
+            return ResponseHandler.generateMessage("Lấy thành công", HttpStatus.OK, "orders", data);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "bases", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
 
         }
     }
@@ -59,10 +58,34 @@ public class OrdersController {
     public ResponseEntity<Object> post(@RequestBody Orders orders) {
         try {
             var res = ordersService.add(orders);
-            return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "bases", res);
+            return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "orders", res);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "bases", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
+
+        }
+
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> put(@PathVariable("id") String id, @RequestBody Orders orders) {
+        try {
+            var res = ordersService.edit(id,orders);
+            return ResponseHandler.generateMessage("Sửa thành công", HttpStatus.OK, "orders", res);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
+
+        }
+
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+        try {
+            var res = ordersService.delete(id);
+            return ResponseHandler.generateMessage("Xóa thành công", HttpStatus.OK, "orders", res);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
 
         }
 
