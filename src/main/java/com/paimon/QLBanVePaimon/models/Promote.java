@@ -1,9 +1,7 @@
 package com.paimon.QLBanVePaimon.models;
 
 import java.time.LocalDateTime;
-
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -23,4 +21,9 @@ public class Promote {
     private LocalDateTime to;
     private String type;
     private int amount;
+
+//     @DocumentReference(lookup="{'promote_id':?#{#self._id} }")
+//     @ReadOnlyProperty
+//     private List<String> order;
+// }
 }

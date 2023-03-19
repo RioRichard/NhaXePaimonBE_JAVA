@@ -1,5 +1,7 @@
 package com.paimon.QLBanVePaimon.services;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.bson.types.ObjectId;
@@ -11,6 +13,7 @@ import com.paimon.QLBanVePaimon.Helper;
 import com.paimon.QLBanVePaimon.models.Buses;
 import com.paimon.QLBanVePaimon.models.Seat;
 import com.paimon.QLBanVePaimon.repositories.BusesRepository;
+import com.paimon.QLBanVePaimon.repositories.SeatRepository;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
 
@@ -19,6 +22,8 @@ import com.paimon.QLBanVePaimon.sideModels.ListData;
 public class BusesService {
     @Autowired
     private BusesRepository busesRepository;
+    @Autowired
+    private SeatRepository seatRepository;
 
     public ListData<Buses> getAll(Pageable pageable) {
 
@@ -33,10 +38,18 @@ public class BusesService {
     public Buses add(Buses buses) {
         var id = new ObjectId();
         buses.setId(id.toString());
-        for (Seat seat : buses.getSeats()) {
-            var seatId = new ObjectId();
-            seat.setId(seatId.toString());
+        List<Seat> seats = new ArrayList<>();
+        
+        for (int i = 1; i <= buses.getNumberSeat(); i++) {
+            seats.add(new Seat(
+                new ObjectId().toString(),
+                "Ghế " + i,
+                null
+            ));
+
         }
+        buses.setSeats(seats);
+        seatRepository.insert(seats);
         return busesRepository.insert(buses);
     }
 

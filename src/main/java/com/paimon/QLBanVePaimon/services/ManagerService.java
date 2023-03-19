@@ -13,7 +13,6 @@ import com.paimon.QLBanVePaimon.repositories.ManagerRepository;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
 
-import lombok.var;
 
 @Service
 public class ManagerService {

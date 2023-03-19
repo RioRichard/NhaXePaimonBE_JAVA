@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.MongoDatabaseFactory;
-
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.convert.DbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultDbRefResolver;
 import org.springframework.data.mongodb.core.convert.DefaultMongoTypeMapper;
@@ -14,16 +14,23 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 @Configuration
 public class MongoConfig {
 
- @Autowired MongoDatabaseFactory mongoDbFactory;
- @Autowired MongoMappingContext mongoMappingContext;
+    @Autowired
+    MongoDatabaseFactory mongoDbFactory;
+    @Autowired
+    MongoMappingContext mongoMappingContext;
 
- @Bean
- public MappingMongoConverter mappingMongoConverter() {
+    @Bean
+    public MappingMongoConverter mappingMongoConverter() {
 
-  DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDbFactory);
-  MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
-  converter.setTypeMapper(new DefaultMongoTypeMapper(null));
+        DbRefResolver dbRefResolver = new DefaultDbRefResolver(mongoDbFactory);
+        MappingMongoConverter converter = new MappingMongoConverter(dbRefResolver, mongoMappingContext);
+        converter.setTypeMapper(new DefaultMongoTypeMapper(null));
 
-  return converter;
- }
+        return converter;
+    }
+
+    @Bean
+    public MongoTemplate mongoTemplate(MongoDatabaseFactory mongoDbFactory, MappingMongoConverter converter) {
+        return new MongoTemplate(mongoDbFactory, converter);
+    }
 }

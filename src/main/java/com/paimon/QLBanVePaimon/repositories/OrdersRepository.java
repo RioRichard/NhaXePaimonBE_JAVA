@@ -5,11 +5,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import com.paimon.QLBanVePaimon.models.Users;
+
+import com.paimon.QLBanVePaimon.models.Orders;
 
 @Repository
-public interface UsersRepository extends MongoRepository<Users,String>{
+public interface OrdersRepository extends MongoRepository<Orders,String> {
     
-    Page<Users> findAll(Pageable pageable);
-    Users getByUsername(String username);
+    Page<Orders> findAll(Pageable pageable);
+
+    
+    // List<Orders> findByUsers(Users users);
+
 }
