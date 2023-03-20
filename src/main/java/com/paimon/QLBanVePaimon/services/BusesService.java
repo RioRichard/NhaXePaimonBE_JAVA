@@ -17,7 +17,6 @@ import com.paimon.QLBanVePaimon.repositories.SeatRepository;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
 
-
 @Service
 public class BusesService {
     @Autowired
@@ -39,13 +38,12 @@ public class BusesService {
         var id = new ObjectId();
         buses.setId(id.toString());
         List<Seat> seats = new ArrayList<>();
-        
+
         for (int i = 1; i <= buses.getNumberSeat(); i++) {
             seats.add(new Seat(
-                new ObjectId().toString(),
-                "Ghế " + i,
-                null
-            ));
+                    new ObjectId().toString(),
+                    "Ghế " + i,
+                    null));
 
         }
         buses.setSeats(seats);
@@ -65,7 +63,7 @@ public class BusesService {
 
     }
 
-    public Buses edit(String id ,Buses buses){
+    public Buses edit(String id, Buses buses) {
 
         Buses updateBuses = busesRepository.findById(id).get();
         updateBuses.setBus_number(buses.getBus_number());
@@ -75,9 +73,15 @@ public class BusesService {
 
     }
 
-    public Buses delete(String id){
-        Buses deleteBuses = busesRepository.findById(id).get();
-        busesRepository.deleteById(id);
-        return deleteBuses;
+    public Buses delete(String id) throws Exception {
+        var deleteBuses = busesRepository.findById(id);
+
+        if (deleteBuses != null) {
+            seatRepository.deleteAll(deleteBuses.get().getSeats());
+            busesRepository.deleteById(id);
+            return deleteBuses.get();
+
+        } else
+            throw new Exception("không tồn tại id này");
     }
 }
