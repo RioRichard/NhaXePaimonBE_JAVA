@@ -1,13 +1,23 @@
 [{
   "_id": {
-    "$oid": "63f8e317dd69fc020020a008"
+    "$oid": "641337ce7ce1a370e2262cb7"
   },
-  "user_id": {
-    "$oid": "63f8e346dd69fc020020a009"
+  "status": "fail",
+  "userId": {
+    "$oid": "63f4d5eb03eeea8d7bcf181f"
+  }
+},{
+  "_id": {
+    "$oid": "6415795f78c2b67f2d5bfb6f"
   },
-  "promote_id": {
-    "$oid": "63f8e359dd69fc020020a00a"
+  "userId": "63f4d5eb03eeea8d7bcf181f",
+  "status": "string",
+  "paymentInfo": "string"
+},{
+  "_id": {
+    "$oid": "641715dee49c73618567e8a5"
   },
-  "status": "",
-  "paymentInfo": ""
+  "userId": "641570310175714ba40ab2d6",
+  "status": "none",
+  "paymentInfo": "abc"
 }]

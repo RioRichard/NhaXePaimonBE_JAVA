@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,14 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.paimon.QLBanVePaimon.AppConstant;
 import com.paimon.QLBanVePaimon.models.Buses;
-import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.services.BusesService;
 import com.paimon.QLBanVePaimon.sideModels.ResponseHandler;
 
 @RestController
 @RequestMapping("buses")
 public class BusesController {
-    
+
     @Autowired
     private BusesService busesService;
 
@@ -39,7 +37,7 @@ public class BusesController {
             var data = busesService.getAll(pageable);
             return ResponseHandler.generateMessage(null, HttpStatus.OK, "buses", data);
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.BAD_REQUEST, "buses", null);
 
         }
     }
@@ -51,7 +49,7 @@ public class BusesController {
             return ResponseHandler.generateMessage(null, HttpStatus.OK, "buses", data);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.BAD_REQUEST, "buses", null);
 
         }
     }
@@ -60,36 +58,49 @@ public class BusesController {
     public ResponseEntity<Object> post(@RequestBody Buses buses) {
         try {
             var res = busesService.add(buses);
-            return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "buses", res);
+            return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.CREATED, "buses", res);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.BAD_REQUEST, "buses", null);
 
         }
 
     }
 
-    @PatchMapping("{id}")
-    public ResponseEntity<Object> patch(@PathVariable String id, @RequestBody PatchRequest<Buses> patchBuses) {
-        try {
-            var res = busesService.patch(id, patchBuses);
-            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "buses", res);
-        } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "buses", null);
-        }
+    // @PatchMapping("{id}")
+    // public ResponseEntity<Object> patch(@PathVariable String id, @RequestBody PatchRequest<Buses> patchBuses) {
+    //     try {
+    //         var res = busesService.patch(id, patchBuses);
+    //         return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "buses", res);
+    //     } catch (Exception e) {
+    //         return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.BAD_REQUEST, "buses", null);
+    //     }
 
-    }
+    // }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Buses buses){
-        var update = busesService.edit(id, buses);
-        return ResponseHandler.generateMessage("Cập Nhật Thành Công", HttpStatus.OK, "buses", update);
+    public ResponseEntity<Object> put(@PathVariable String id, @RequestBody Buses buses) {
+
+        try {
+            var update = busesService.edit(id, buses);
+
+            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "buses", update);
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.BAD_REQUEST, "buses", null);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> put(@PathVariable String id){
-        var delete = busesService.delete(id);
-        return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "buses", delete);
+    public ResponseEntity<Object> put(@PathVariable String id) {
+
+        try {
+            var delete = busesService.delete(id);
+            return ResponseHandler.generateMessage("Xóa Thành Công", HttpStatus.OK, "buses", delete);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.BAD_REQUEST, "buses", null);
+
+        }
     }
-    
+
 }

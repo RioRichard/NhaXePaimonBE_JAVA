@@ -35,7 +35,7 @@ public class UsersService {
         var id = new ObjectId();
         users.setId(id.toString());
         
-        var hasedPass = Helper.hash256(users.getId() + users.getPassword());
+        var hasedPass = Helper.hash256(users.getPassword());
         users.setPassword(hasedPass);
 
         return usersRepository.insert(users);
@@ -47,8 +47,8 @@ public class UsersService {
         for (String propString : patchUsers.getPropChanging()) {
             var valueFromPatchData = Helper.get(patchUsers.getData(), propString);
             if (propString == "password") {
-                var userId = Helper.get(patchUsers.getData(), "id");
-                valueFromPatchData = Helper.hash256(userId + valueFromPatchData.toString());
+
+                valueFromPatchData = Helper.hash256(valueFromPatchData.toString());
             }
             Helper.set(dataChanging, propString, valueFromPatchData);
         }
@@ -61,7 +61,7 @@ public class UsersService {
 
         Users updateUsers = usersRepository.findById(id).get();
         updateUsers.setUsername(users.getUsername());
-        updateUsers.setPassword(Helper.hash256(id + users.getPassword()));
+        updateUsers.setPassword(Helper.hash256(users.getPassword()));
         updateUsers.setName(users.getName());
         updateUsers.setEmail(users.getEmail());
         updateUsers.setPhone(users.getPhone());
