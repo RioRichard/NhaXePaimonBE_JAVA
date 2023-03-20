@@ -3,47 +3,29 @@
     "$oid": "63f8d1b8dd69fc0200209ff8"
   },
   "from_Id": {
-    "$oid": "63f8e2c9dd69fc020020a001"
+    "$oid": "63f4d77003eeea8d7bcf1821"
   },
   "to_Id": {
-    "$oid": "63f8e2ccdd69fc020020a002"
+    "$oid": "63f4d7a403eeea8d7bcf1822"
   },
   "departure": {
-    "$date": {
-      "$numberLong": "1669914000000"
-    }
+    "$date": "2022-12-01T17:00:00.000Z"
   },
   "arrival": {
-    "$date": {
-      "$numberLong": "1669914000000"
-    }
+    "$date": "2022-12-01T17:00:00.000Z"
   },
   "bus_id": {
-    "$oid": "63f8e103dd69fc0200209ffb"
+    "$oid": "64020cd67440c51167cd9524"
   },
-  "staff_id": {
-    "$oid": "63f8e1eadd69fc0200209fff"
-  },
-  "extra_Staff_id": {
-    "$oid": "63f8e1eddd69fc020020a000"
-  },
-  "tickets": [
+  "orders": [
     {
-      "order": {
-        "order_id": {
-          "$oid": "63f8e758dd69fc020020a00c"
-        },
-        "status": "waiting"
-      },
-      "seat_id": {
-        "$oid": "63f8e75add69fc020020a00d"
-      }
+      "$oid": "641337ce7ce1a370e2262cb7"
     },
     {
-      "order": null,
-      "seat_id": {
-        "$oid": "63f8e75add69fc020020a00d"
-      }
+      "$oid": "6415795f78c2b67f2d5bfb6f"
+    },
+    {
+      "$oid": "641715dee49c73618567e8a5"
     }
   ],
   "price": 1000
