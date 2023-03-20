@@ -22,7 +22,7 @@ public class AuthenticationService {
         if (user == null) {
             throw new Exception("Username hoặc mật khẩu bị sai. Kiểm tra lại");
         }
-        var hasedPass = Helper.hash256(user.getId() + loginModel.getPass());
+        var hasedPass = Helper.hash256(loginModel.getPass());
         if (user.getPass() != hasedPass) {
             throw new Exception("Username hoặc mật khẩu bị sai. Kiểm tra lại");
 
@@ -37,7 +37,7 @@ public class AuthenticationService {
         if (user == null) {
             throw new Exception("Username hoặc mật khẩu bị sai. Kiểm tra lại");
         }
-        var hasedPass = Helper.hash256(user.getId() + loginModel.getPass());
+        var hasedPass = Helper.hash256(loginModel.getPass());
         if (user.getPassword() != hasedPass) {
             throw new Exception("Username hoặc mật khẩu bị sai. Kiểm tra lại");
 
