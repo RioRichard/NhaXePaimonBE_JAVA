@@ -60,6 +60,7 @@ public class OrdersService {
         var editingOrders = ordersRepository.findById(id).get();
 
         editingOrders.setStatus(orders.getStatus());
+        editingOrders.setPaymentInfo(orders.getPaymentInfo());
         return ordersRepository.save(editingOrders);
 
     }
