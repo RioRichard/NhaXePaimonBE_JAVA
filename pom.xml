@@ -50,7 +50,7 @@
 		</dependency>-->
 		<!-- API, java.xml.bind module -->
 		
-		<dependency>
+		<!-- <dependency>
 			<groupId>jakarta.xml.bind</groupId>
 			<artifactId>jakarta.xml.bind-api</artifactId>
 			<version>2.3.2</version>
@@ -61,7 +61,7 @@
 			<groupId>org.glassfish.jaxb</groupId>
 			<artifactId>jaxb-runtime</artifactId>
 			<version>2.3.2</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- <dependency>
 			<groupId>javax.servlet</groupId>

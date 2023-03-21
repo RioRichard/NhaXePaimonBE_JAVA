@@ -24,7 +24,7 @@ public class WebSecurityConfigs {
 
         httpSecurity.csrf().disable()
 
-                .authorizeHttpRequests().requestMatchers("/authen/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .authorizeHttpRequests().requestMatchers("/authen/**", "/swagger-ui/**", "/v3/**").permitAll()
                 // .anyRequest()
                 // .authenticated()
                 .requestMatchers("/managers/**").hasRole("ADMIN")
