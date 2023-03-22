@@ -1,7 +1,10 @@
 package com.paimon.QLBanVePaimon.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -9,6 +12,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -74,10 +78,25 @@ public class Routes {
     @Transient
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String extraStaffId;
+    private float price;
 
-    @DBRef
+
+    // @DBRef
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @JsonIgnore
+    @Field("orders")
+    private List<ObjectId> listOrders;
+
+    @Transient
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private List<String> orders;
-    private float price;
+
+    public List<String> getOrders() {
+        List<String> listOrderStrings = new ArrayList<>();
+        for (var order : this.listOrders) {
+            listOrderStrings.add(order.toString());
+        }
+        return listOrderStrings;
+    }
 
 }

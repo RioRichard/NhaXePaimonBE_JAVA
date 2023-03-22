@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.ReadOnlyProperty;
-import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.FieldType;
@@ -39,7 +39,8 @@ public class Users {
 
     private String phone;
 
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @DocumentReference(lazy = true,collection = "orders" )
+    // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    @DocumentReference(lookup="{'orders':?#{#target._id} }")
+    // @DocumentReference(lookup = "")
     private List<Orders> orders;
 }

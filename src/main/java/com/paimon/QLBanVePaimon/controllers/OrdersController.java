@@ -22,8 +22,9 @@ import com.paimon.QLBanVePaimon.sideModels.ResponseHandler;
 
 @RestController
 @RequestMapping("orders")
+
 public class OrdersController {
-    
+
     @Autowired
     private OrdersService ordersService;
 
@@ -66,10 +67,11 @@ public class OrdersController {
         }
 
     }
+
     @PutMapping("/{id}")
     public ResponseEntity<Object> put(@PathVariable("id") String id, @RequestBody Orders orders) {
         try {
-            var res = ordersService.edit(id,orders);
+            var res = ordersService.edit(id, orders);
             return ResponseHandler.generateMessage("Sửa thành công", HttpStatus.OK, "orders", res);
 
         } catch (Exception e) {
@@ -78,17 +80,18 @@ public class OrdersController {
         }
 
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable("id") String id) {
-        try {
-            var res = ordersService.delete(id);
-            return ResponseHandler.generateMessage("Xóa thành công", HttpStatus.OK, "orders", res);
 
-        } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
+    // @DeleteMapping("/{id}")
+    // public ResponseEntity<Object> delete(@PathVariable("id") String id) {
+    //     try {
+    //         var res = ordersService.delete(id);
+    //         return ResponseHandler.generateMessage("Xóa thành công", HttpStatus.OK, "orders", res);
 
-        }
+    //     } catch (Exception e) {
+    //         return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
 
-    }
+    //     }
+
+    // }
 
 }
