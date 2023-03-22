@@ -20,5 +20,9 @@ public interface RoutesRepository extends MongoRepository<Routes,String>{
     Routes findByOrders(String id);
     // List<Routes> findByOrdersContaining(String orders);
     List<Routes> findByListOrdersContaining(ObjectId objectId);
+    Page<Routes> findAllByFromAndTo(ObjectId fromId, ObjectId toId, Pageable pageable);
+    Page<Routes> findAllByFrom (ObjectId fromId, Pageable pageable);
+    Page<Routes> findAllByTo(ObjectId toId, Pageable pageable);
+
 
 }

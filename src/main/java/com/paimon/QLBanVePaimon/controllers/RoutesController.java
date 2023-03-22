@@ -29,11 +29,13 @@ public class RoutesController {
     @GetMapping
     public ResponseEntity<Object> getAll(
             @RequestParam(value = "page", defaultValue = AppConstant.MIN_PAGE, required = false) int page,
-            @RequestParam(value = "size", defaultValue = AppConstant.MAX_SIZE_QUERY, required = false) int size) {
+            @RequestParam(value = "size", defaultValue = AppConstant.MAX_SIZE_QUERY, required = false) int size,
+            @RequestParam(value = "fromId", defaultValue = "",required = false) String fromId,
+            @RequestParam(value = "toId",  defaultValue = "",required = false) String toId) {
 
         try {
             Pageable pageable = PageRequest.of(page - 1, size);
-            var data = routesService.getAll(pageable);
+            var data = routesService.getAll(fromId,toId,pageable);
             return ResponseHandler.generateMessage(null, HttpStatus.OK, "routes", data);
         } catch (Exception e) {
             return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "routes", null);
