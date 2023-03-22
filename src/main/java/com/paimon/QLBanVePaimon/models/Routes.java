@@ -7,7 +7,6 @@ import java.util.List;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -79,7 +78,6 @@ public class Routes {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String extraStaffId;
     private float price;
-
 
     // @DBRef
     // @JsonProperty(access = JsonProperty.Access.READ_ONLY)

@@ -12,25 +12,25 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.paimon.QLBanVePaimon.repositories.ManagerRepository;
+import com.paimon.QLBanVePaimon.repositories.UsersRepository;
 
 @Service
-public class ManagerDetailService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
-    private ManagerRepository managerRepository;
-
+    private UsersRepository usersRepository;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         try {
-            var user = managerRepository.getByUsername(username);
+            var user = usersRepository.getByUsername(username);
             List<GrantedAuthority> roles = new ArrayList<>();
-            roles.add(new SimpleGrantedAuthority("ROLE_" + user.getRole().toUpperCase()));
+            roles.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-            return new User(user.getUsername(), user.getPass(), roles);
+            return new User(user.getUsername(), user.getPassword(), roles);
         } catch (Exception e) {
             return null;
         }
 
     }
+    
 }

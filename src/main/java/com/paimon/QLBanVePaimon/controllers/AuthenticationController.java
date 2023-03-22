@@ -3,7 +3,6 @@ package com.paimon.QLBanVePaimon.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,13 +30,11 @@ public class AuthenticationController {
 
         try {
             var data = authenticationService.getAdminToken(loginModel);
-            final String username = data.getUsername();
-            final UserDetails userDetails = managerDetailService.loadUserByUsername(username);
-            final String token = jwtTokenUtil.generateToken(userDetails);
-            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", token);
+            
+            return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "token", data);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "managers", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "token", null);
 
         }
 
@@ -46,7 +43,7 @@ public class AuthenticationController {
     public ResponseEntity<Object> authUser(@RequestBody LoginModel loginModel) {
         
         try {
-            var data = authenticationService.getAdminToken(loginModel);
+            var data = authenticationService.getUserToken(loginModel);
             return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", data);
 
         } catch (Exception e) {

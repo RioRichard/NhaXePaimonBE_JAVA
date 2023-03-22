@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +16,6 @@ import com.paimon.QLBanVePaimon.repositories.BusesRepository;
 import com.paimon.QLBanVePaimon.repositories.OrdersRepository;
 import com.paimon.QLBanVePaimon.repositories.RoutesRepository;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
-
-import lombok.var;
 
 @Service
 public class RoutesService {
@@ -53,14 +50,10 @@ public class RoutesService {
 
         }
         return new ListData<Routes>(
-                    routesRepository.findAll(pageable));
+                routesRepository.findAll(pageable));
         // throw new Exception("Không có thông tin").
 
-
     }
-
-    
-    
 
     public Routes getById(String id) {
         var data = routesRepository.findById(id).get();
@@ -68,8 +61,8 @@ public class RoutesService {
         for (Orders order : orders) {
             for (Seat item : order.getSeat()) {
                 for (Seat seatInBus : data.getBus().getSeats()) {
-                    if (item.getId().equals(seatInBus.getId()) ) {
-                        
+                    if (item.getId().equals(seatInBus.getId())) {
+
                         seatInBus.setStatus("true");
                     }
                 }

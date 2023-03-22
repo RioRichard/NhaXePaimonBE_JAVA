@@ -3,6 +3,7 @@ package com.paimon.QLBanVePaimon.configs;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -25,9 +26,28 @@ public class WebSecurityConfigs {
         httpSecurity.csrf().disable()
 
                 .authorizeHttpRequests().requestMatchers("/authen/**", "/swagger-ui/**", "/v3/**").permitAll()
+                
+                .requestMatchers("/staffs").hasRole("ADMIN,MANAGER")
+                .requestMatchers("/buses").hasRole("ADMIN,MANAGER")
+
+                .requestMatchers("/managers/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.POST,"/users").permitAll()
+                .requestMatchers(HttpMethod.POST,"/routes/**").hasRole("ADMIN,MANAGER")
+                .requestMatchers(HttpMethod.PUT,"/routes/**").hasRole("ADMIN,MANAGER")
+                .requestMatchers(HttpMethod.PUT,"/orders/**").hasRole("ADMIN,MANAGER")
+                .requestMatchers(HttpMethod.POST,"/orders/**").hasRole("ADMIN,MANAGER")
+                .requestMatchers(HttpMethod.GET,"/orders/**").permitAll()
+                .requestMatchers(HttpMethod.GET,"/bases/**").permitAll()
+                .anyRequest().authenticated()
+
+                
+                
+
+
+
+
                 // .anyRequest()
                 // .authenticated()
-                .requestMatchers("/managers/**").hasRole("ADMIN")
                 
                 
                     
