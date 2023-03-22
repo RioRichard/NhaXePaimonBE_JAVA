@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -56,6 +57,18 @@ public class RoutesController {
         try {
             var res = routesService.add(route);
             return ResponseHandler.generateMessage("Tạo thành công", HttpStatus.OK, "orders", res);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);
+
+        }
+
+    }
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> put(@PathVariable("id") String id, @RequestBody Routes routes) {
+        try {
+            var res = routesService.edit(id, routes);
+            return ResponseHandler.generateMessage("Sửa thành công", HttpStatus.OK, "orders", res);
 
         } catch (Exception e) {
             return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.MULTI_STATUS, "orders", null);

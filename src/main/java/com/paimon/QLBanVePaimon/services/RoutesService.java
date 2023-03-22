@@ -30,6 +30,7 @@ public class RoutesService {
     public ListData<Routes> getAll(Pageable pageable) {
 
         var data = routesRepository.findAll(pageable);
+        // var orders = ordersRepository.findAll
         
         return new ListData<Routes>(data);
     }
@@ -50,6 +51,19 @@ public class RoutesService {
         route.setTo(to.get());
         routesRepository.insert(route);
         return null;
+    }
+    public Routes edit(String id, Routes route) throws Exception {
+        var routes = routesRepository.findById(id).get();
+        var bus = busesRepository.findById(route.getBus_id());
+        var from = basesRepository.findById(route.getFrom_id());
+        var to = basesRepository.findById(route.getTo_id());
+        if (bus == null || from == null || to == null || from == to) {
+            throw new Exception("Kiểm tra bus hoặc điểm đi hoặc điểm tới là hợp lệ");
+        }
+        routes.setBus(bus.get());
+        routes.setFrom(from.get());
+        routes.setTo(to.get());
+        return routesRepository.save(routes);
     }
 
    
