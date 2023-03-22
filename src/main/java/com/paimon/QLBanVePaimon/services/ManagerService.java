@@ -13,8 +13,6 @@ import com.paimon.QLBanVePaimon.repositories.ManagerRepository;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
 
-import lombok.var;
-
 @Service
 public class ManagerService {
 
@@ -35,17 +33,17 @@ public class ManagerService {
     public Manager add(Manager manager) {
         var id = new ObjectId();
         manager.setId(id.toString());
-        var hasedPass = Helper.hash256(manager.getId() + manager.getPass());
-        manager.setPass(hasedPass);
-        System.out.println(hasedPass);
+
+        manager.setPass(Helper.hash256(manager.getPass()));
         return managerRepository.insert(manager);
     }
 
-    public Manager edit(String id ,Manager manager){
+    public Manager edit(String id, Manager manager) {
 
         Manager updateManager = managerRepository.findById(id).get();
         updateManager.setUsername(manager.getUsername());
-        updateManager.setPass(manager.getPass());
+
+        updateManager.setPass(Helper.hash256(manager.getPass()));
         updateManager.setEmail(manager.getEmail());
         updateManager.setPhone(manager.getPhone());
         updateManager.setRole(manager.getRole());
@@ -53,11 +51,10 @@ public class ManagerService {
 
     }
 
-    public Manager delete(String id){
+    public void delete(String id) {
 
-        Manager deleteManager = managerRepository.findById(id).get();
         managerRepository.deleteById(id);
-        return deleteManager;
+        return;
     }
 
     public Manager patch(String id, PatchRequest<Manager> patchManager) {
@@ -65,6 +62,10 @@ public class ManagerService {
 
         for (String propString : patchManager.getPropChanging()) {
             var valueFromPatchData = Helper.get(patchManager.getData(), propString);
+            if (propString == "password") {
+
+                valueFromPatchData = Helper.hash256(valueFromPatchData.toString());
+            }
             Helper.set(dataChanging, propString, valueFromPatchData);
         }
         managerRepository.save(dataChanging);

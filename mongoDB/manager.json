@@ -2,9 +2,29 @@
   "_id": {
     "$oid": "63f4d4ce03eeea8d7bcf181e"
   },
-  "username": "admin",
-  "password": "pass",
+  "username": "hhoooohohodsadasdasdadh",
+  "pass": "1ee8fb89a0748d76d6d09208cf6184b1b38a6df62465dbedc7709e199ca15f2b",
   "email": "thanh.huuphungak47@gmail.com",
-  "phone": "0384041641",
+  "phone": "03840416458",
   "role": "admin"
+},{
+  "_id": {
+    "$oid": "63fcd8afea76fd03d8bc25d7"
+  },
+  "username": "test",
+  "pass": "107acb4893e1fd216caa93426d2831612e13a0e81b885188e6b4e3f86ab7f72c",
+  "email": "test",
+  "phone": "test",
+  "role": "test",
+  "_class": "com.paimon.QLBanVePaimon.models.Manager"
+},{
+  "_id": {
+    "$oid": "640365085059110e026e391d"
+  },
+  "username": "test1",
+  "pass": "ef683adebada883fc0b4308e8b4c786580e21b9e687a34985911e8a7462de573",
+  "email": "string",
+  "phone": "string",
+  "role": "ADMIN",
+  "_class": "com.paimon.QLBanVePaimon.models.Manager"
 }]

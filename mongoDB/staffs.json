@@ -1,9 +1,17 @@
 [{
   "_id": {
-    "$oid": "63f4d7d603eeea8d7bcf1823"
+    "$oid": "63f4d77003eeea8d7bcf1821"
   },
-  "name": "",
-  "address": "",
-  "phone": "",
-  "position": ""
+  "name": "NV1",
+  "address": "HCM",
+  "phone": "0327387506",
+  "position": "Staff"
+},{
+  "_id": {
+    "$oid": "64153df36966a62411c987a7"
+  },
+  "name": "1",
+  "address": "1",
+  "phone": "1",
+  "position": "1"
 }]
