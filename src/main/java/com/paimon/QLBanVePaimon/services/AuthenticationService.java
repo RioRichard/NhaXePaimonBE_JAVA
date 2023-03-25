@@ -1,22 +1,14 @@
 package com.paimon.QLBanVePaimon.services;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.paimon.QLBanVePaimon.Helper;
 import com.paimon.QLBanVePaimon.configs.JwtTokenUtil;
-import com.paimon.QLBanVePaimon.models.Manager;
 import com.paimon.QLBanVePaimon.repositories.ManagerRepository;
 import com.paimon.QLBanVePaimon.repositories.UsersRepository;
 import com.paimon.QLBanVePaimon.requestModel.LoginModel;
-
-import io.jsonwebtoken.ExpiredJwtException;
-import jakarta.servlet.http.HttpServletRequest;
 
 @Service
 public class AuthenticationService {
