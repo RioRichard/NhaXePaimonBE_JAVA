@@ -2,6 +2,7 @@ package com.paimon.QLBanVePaimon.models;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -41,8 +42,13 @@ public class Orders {
     @Transient
     private String routeId;
 
-    private String userId;
+    @Field("userId")
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private ObjectId user;
 
+    @Transient
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String userId;
     private String status;
     private String paymentInfo;
     
@@ -55,5 +61,11 @@ public class Orders {
     public void setSeat(List<Seat> seat) {
         this.seat = seat;
     }
+
+    @JsonIgnore
+    public ObjectId getUser() {
+        return user;
+    }
+    
     
 }

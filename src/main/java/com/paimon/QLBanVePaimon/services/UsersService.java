@@ -7,34 +7,41 @@ import org.springframework.stereotype.Service;
 
 import com.paimon.QLBanVePaimon.Helper;
 import com.paimon.QLBanVePaimon.models.Users;
+import com.paimon.QLBanVePaimon.repositories.OrdersRepository;
 import com.paimon.QLBanVePaimon.repositories.UsersRepository;
 import com.paimon.QLBanVePaimon.requestModel.PatchRequest;
 import com.paimon.QLBanVePaimon.sideModels.ListData;
 
 @Service
 public class UsersService {
-    
+
     @Autowired
     private UsersRepository usersRepository;
 
-    
+    @Autowired
+    private OrdersRepository ordersRepository;
 
     public ListData<Users> getAll(Pageable pageable) {
 
         var data = usersRepository.findAll(pageable);
+        for (Users users : data) {
+            var orders = ordersRepository.findByUser(new ObjectId(users.getId()));
+            users.setOrders(orders);
+        }
         return new ListData<>(data);
     }
 
     public Users getId(String id) {
         var data = usersRepository.findById(id).get();
-        
+        var orders = ordersRepository.findByUser(new ObjectId(data.getId()));
+        data.setOrders(orders);
         return data;
     }
 
     public Users add(Users users) {
         var id = new ObjectId();
         users.setId(id.toString());
-        
+
         var hasedPass = Helper.hash256(users.getPassword());
         users.setPassword(hasedPass);
 
@@ -57,7 +64,7 @@ public class UsersService {
 
     }
 
-    public Users edit(String id ,Users users){
+    public Users edit(String id, Users users) {
 
         Users updateUsers = usersRepository.findById(id).get();
         updateUsers.setUsername(users.getUsername());
@@ -69,7 +76,7 @@ public class UsersService {
 
     }
 
-    public Users delete(String id){
+    public Users delete(String id) {
         Users deleteUsers = usersRepository.findById(id).get();
         usersRepository.deleteById(id);
         return deleteUsers;

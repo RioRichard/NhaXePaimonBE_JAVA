@@ -2,6 +2,7 @@ package com.paimon.QLBanVePaimon.repositories;
 
 import java.util.List;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -15,6 +16,7 @@ public interface OrdersRepository extends MongoRepository<Orders,String> {
     
     Page<Orders> findAll(Pageable pageable);
     List<Orders> findByIdIn(List<String> ids);
+    List<Orders> findByUser(ObjectId userId);
     
 
     

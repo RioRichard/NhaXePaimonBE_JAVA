@@ -2,8 +2,8 @@ package com.paimon.QLBanVePaimon.models;
 
 import java.util.List;
 
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.FieldType;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
@@ -35,7 +35,8 @@ public class Users {
     private String phone;
 
     // @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    @DocumentReference(lookup="{'orders':?#{#target._id} }")
+    // @DocumentReference(lookup="{'orders':?#{#self.id} }")
     // @DocumentReference(lookup = "")
+    @Transient
     private List<Orders> orders;
 }
