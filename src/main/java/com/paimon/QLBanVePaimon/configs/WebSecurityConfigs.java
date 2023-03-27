@@ -23,7 +23,7 @@ public class WebSecurityConfigs {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity httpSecurity) throws Exception {
 
-        httpSecurity.csrf().disable()
+        httpSecurity.cors().and().csrf().disable()
 
                 .authorizeHttpRequests().requestMatchers("/authen/**", "/swagger-ui/**", "/v3/**").permitAll()
                 
