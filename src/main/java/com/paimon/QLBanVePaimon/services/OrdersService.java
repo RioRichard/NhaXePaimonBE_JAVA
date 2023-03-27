@@ -24,7 +24,7 @@ public class OrdersService {
         var data = ordersRepository.findAll(pageable);
         for (Orders orders : data) {
             var route = routesRepository.findByListOrdersContaining(new ObjectId(orders.getId()));
-            if (route!=null) {
+            if (!route.isEmpty()) {
                 orders.setRoute(route.get(0));
             }
         }

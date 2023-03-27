@@ -27,17 +27,19 @@ public class WebSecurityConfigs {
 
                 .authorizeHttpRequests().requestMatchers("/authen/**", "/swagger-ui/**", "/v3/**").permitAll()
                 
-                .requestMatchers("/staffs").hasRole("ADMIN,MANAGER")
-                .requestMatchers("/buses").hasRole("ADMIN,MANAGER")
-
-                .requestMatchers("/managers/**").hasRole("ADMIN")
                 .requestMatchers(HttpMethod.POST,"/users").permitAll()
-                .requestMatchers(HttpMethod.POST,"/routes/**").hasRole("ADMIN,MANAGER")
-                .requestMatchers(HttpMethod.PUT,"/routes/**").hasRole("ADMIN,MANAGER")
-                .requestMatchers(HttpMethod.PUT,"/orders/**").hasRole("ADMIN,MANAGER")
-                .requestMatchers(HttpMethod.POST,"/orders/**").hasRole("ADMIN,MANAGER")
                 .requestMatchers(HttpMethod.GET,"/orders/**").permitAll()
                 .requestMatchers(HttpMethod.GET,"/bases/**").permitAll()
+                // .requestMatchers("/staffs").hasRole("ADMIN,MANAGER")
+                // .requestMatchers("/buses").hasRole("ADMIN,MANAGER")
+
+                // .requestMatchers("/managers/**").hasRole("ADMIN")
+                
+                // .requestMatchers(HttpMethod.POST,"/routes/**").hasRole("ADMIN,MANAGER")
+                // .requestMatchers(HttpMethod.PUT,"/routes/**").hasRole("ADMIN,MANAGER")
+                // .requestMatchers(HttpMethod.PUT,"/orders/**").hasRole("ADMIN,MANAGER")
+                // .requestMatchers(HttpMethod.POST,"/orders/**").hasRole("ADMIN,MANAGER")
+                
                 .anyRequest().authenticated()
 
                 
