@@ -56,17 +56,37 @@ public class AuthenticationController {
         }
 
     }
-    // @GetMapping
-    // public ResponseEntity<Object> getUserInfo(HttpServletRequest request, @RequestBody LoginModel loginModel) {
 
-    //     try {
-    //         var data = authenticationService.getMe(request, loginModel);
-    //         return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", data);
+    @GetMapping("getme")
+    public ResponseEntity<Object> getUserInfo(HttpServletRequest request) {
 
-    //     } catch (Exception e) {
-    //         return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "managers", null);
+        try {
+            var data = authenticationService.getUser(request);
+            return ResponseHandler.generateMessage("Lấy thành công", HttpStatus.OK,
+                    "user", data);
 
-    //     }
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(),
+                    HttpStatus.UNAUTHORIZED, "username", null);
 
-    // }
+        }
+
+    }
+    @GetMapping("admin/getme")
+    public ResponseEntity<Object> getManagerInfo(HttpServletRequest request) {
+
+        try {
+            var data = authenticationService.getManager(request);
+            return ResponseHandler.generateMessage("Lấy thành công", HttpStatus.OK,
+                    "manager", data);
+
+        } catch (Exception e) {
+            return ResponseHandler.generateMessage(e.getMessage(),
+                    HttpStatus.UNAUTHORIZED, "managers", null);
+
+        }
+
+    }
+
+    
 }

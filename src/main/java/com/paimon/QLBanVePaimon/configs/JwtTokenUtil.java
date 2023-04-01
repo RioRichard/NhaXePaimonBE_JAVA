@@ -1,7 +1,6 @@
 package com.paimon.QLBanVePaimon.configs;
 
 import java.io.Serializable;
-import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtTokenUtil implements Serializable {
@@ -30,6 +28,9 @@ public class JwtTokenUtil implements Serializable {
     // retrieve expiration date from jwt token
     public Date getExpirationDateFromToken(String token) {
         return getClaimFromToken(token, Claims::getExpiration);
+    }
+    public String getIdFromToken(String token) {
+        return getClaimFromToken(token, Claims::getId);
     }
 
     public String getTypeFromToken(String token) {
@@ -55,9 +56,12 @@ public class JwtTokenUtil implements Serializable {
     }
 
     // generate token for user
-    public String generateToken(UserDetails userDetails, String type) {
+    public String generateToken(UserDetails userDetails, String id, String type) {
         Map<String, Object> claims = new HashMap<>();
+        claims.put("jti", id);
         claims.put("type", type);
+
+
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
