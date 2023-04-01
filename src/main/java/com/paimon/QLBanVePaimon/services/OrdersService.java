@@ -1,5 +1,7 @@
 package com.paimon.QLBanVePaimon.services;
 
+import java.util.ArrayList;
+
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -44,9 +46,13 @@ public class OrdersService {
     public Orders add(Orders orders) {
         var id = new ObjectId();
         orders.setId(id.toString());
+        orders.setUser(new ObjectId(orders.getUserId()));
 
         var route = routesRepository.findById(orders.getRouteId()).get();
         var listOrders = route.getListOrders();
+        if (listOrders == null) {
+            listOrders = new ArrayList<>();
+        }
         listOrders.add(id);
         route.setListOrders(listOrders);
         routesRepository.save(route);

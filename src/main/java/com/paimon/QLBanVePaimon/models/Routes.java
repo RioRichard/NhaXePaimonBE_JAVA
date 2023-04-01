@@ -91,9 +91,12 @@ public class Routes {
 
     public List<String> getOrders() {
         List<String> listOrderStrings = new ArrayList<>();
-        for (var order : this.listOrders) {
-            listOrderStrings.add(order.toString());
+        if (this.listOrders != null) {
+            for (var order : this.listOrders) {
+                listOrderStrings.add(order.toString());
+            }
         }
+
         return listOrderStrings;
     }
 
