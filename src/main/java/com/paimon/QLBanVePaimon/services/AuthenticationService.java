@@ -22,6 +22,9 @@ public class AuthenticationService {
     private UsersRepository usersRepository;
 
     @Autowired
+    private UsersService userService;
+
+    @Autowired
     ManagerDetailService managerDetailService;
     @Autowired
     CustomUserDetailService userDetailService;
@@ -58,7 +61,7 @@ public class AuthenticationService {
 
         } else {
             final String username = user.getUsername();
-            final UserDetails userDetails = managerDetailService.loadUserByUsername(username);
+            final UserDetails userDetails = userDetailService.loadUserByUsername(username);
             return jwtTokenUtil.generateToken(userDetails,user.getId(),"user");
         }
 
@@ -81,7 +84,7 @@ public class AuthenticationService {
     
     public Object getUser(HttpServletRequest request){
         String id = getUserNameFromToken(request);
-        return usersRepository.findById(id);
+        return userService.getId(id);
         
     }
     public Object getManager(HttpServletRequest request){
