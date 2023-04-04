@@ -53,7 +53,7 @@ public class UsersService {
 
         for (String propString : patchUsers.getPropChanging()) {
             var valueFromPatchData = Helper.get(patchUsers.getData(), propString);
-            if (propString == "password") {
+            if (propString.equals("password")) {
 
                 valueFromPatchData = Helper.hash256(valueFromPatchData.toString());
             }

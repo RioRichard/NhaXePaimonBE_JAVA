@@ -51,7 +51,7 @@ public class AuthenticationController {
             return ResponseHandler.generateMessage("Lưu thành công", HttpStatus.OK, "managers", data);
 
         } catch (Exception e) {
-            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "managers", null);
+            return ResponseHandler.generateMessage(e.getMessage(), HttpStatus.UNAUTHORIZED, "users", null);
 
         }
 
